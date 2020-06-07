@@ -10,10 +10,8 @@ default: all
 # Sources
 #--------------------------------------------------------------------
 
-asm_tests = \
-	test.S \
 
-extra_files = 
+asm_tests =  $(wildcard *.S)
 
 #--------------------------------------------------------------------
 # Build rules
@@ -35,11 +33,11 @@ asm_tests_hex  = $(addsuffix .hex,  $(asm_tests_bin))
 $(asm_tests_dump): %.dump: %
 	$(RISCV_OBJDUMP) $< > $@
 
-$(asm_tests_bin): %: %.S $(extra_files)
+$(asm_tests_bin): %: %.S
 	$(RISCV_GCC) $(RISCV_GCC_OPTS) -I../env/p -T../env/p/link.ld $< -o $@
 
-$(asm_tests_hex): %.hex: % $(extra_files)
-	elf2hex 16 16384 $< > $@
+$(asm_tests_hex): %.hex: %
+	elf2hex 8 2097152  $< > $@
 
 $(asm_tests_sig): %.sig: %
 	$(RISCV_SIM) +signature=$@ $<
@@ -56,7 +54,7 @@ junk += $(asm_tests_bin) $(asm_tests_dump) $(asm_tests_sig) $(asm_tests_hex)
 #------------------------------------------------------------
 # Default
 
-all: $(asm_tests_dump) $(asm_tests_hex)
+all: $(asm_tests_dump)
 
 #------------------------------------------------------------
 # Clean up
@@ -65,4 +63,4 @@ clean:
 	rm -rf $(junk)
 
 clean-all: clean
-	rm -rf test*.S test*.stats test*.hex test*.out test*.dump test test_1* test_pseg_* schad* failedtests/*
+	rm -rf test*.stats test*.hex test*.out test*.dump test test_1* test_pseg_* schad* failedtests/*
