@@ -15,6 +15,7 @@ cfgopt := $(space)-f$(space)
 gitopt := $(space)-g$(space)
 CFG := $(subst $(space),$(cfgopt),$(CONFIG))
 GITCMT := $(subst $(space),$(gitopt),$(COMMIT))
+NUM_CASE := 100
 
 .phony: gen ctest rtest itest igentest cgentest rgentest \
 cnight rnight crnight csuite rsuite \
@@ -73,3 +74,5 @@ rnight:
 crnight:
 	$(SBT) 'overnight/run -c $(C_SIM) -r $(R_SIM) -g $(COMMIT) $(OPTIONS)'
 
+gencase:
+	$(SBT) 'generator/run -n $(NUM_CASE)'
