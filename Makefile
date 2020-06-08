@@ -15,7 +15,7 @@ cfgopt := $(space)-f$(space)
 gitopt := $(space)-g$(space)
 CFG := $(subst $(space),$(cfgopt),$(CONFIG))
 GITCMT := $(subst $(space),$(gitopt),$(COMMIT))
-NUM_CASE := 100
+NUM_CASE := 10
 
 .phony: gen ctest rtest itest igentest cgentest rgentest \
 cnight rnight crnight csuite rsuite \

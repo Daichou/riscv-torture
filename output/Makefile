@@ -19,7 +19,8 @@ asm_tests =  $(wildcard *.S)
 
 RISCV_GCC = riscv32-unknown-elf-gcc
 RISCV_GCC_OPTS = -nostdlib -nostartfiles -Wa,-march=rv32im
-RISCV_OBJDUMP = riscv32-unknown-elf-objdump --disassemble-all --section=.text --section=.data --section=.bss
+#RISCV_OBJDUMP = riscv32-unknown-elf-objdump --disassemble-all --section=.text --section=.data --section=.bss
+RISCV_OBJDUMP = riscv32-unknown-elf-objdump -S
 RISCV_SIM = spike --extension=hwacha
 
 #------------------------------------------------------------
