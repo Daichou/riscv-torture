@@ -18,7 +18,7 @@ GITCMT := $(subst $(space),$(gitopt),$(COMMIT))
 NUM_CASE := 10
 
 .phony: gen ctest rtest itest igentest cgentest rgentest \
-cnight rnight crnight csuite rsuite \
+cnight rnight crnight csuite rsuite clean\
 
 gen:
 	$(SBT) 'generator/run $(OPTIONS)'
@@ -76,3 +76,9 @@ crnight:
 
 gencase:
 	$(SBT) 'generator/run -n $(NUM_CASE)'
+
+clean:
+	mv output/Makefile ./Makefile.bak
+	rm -rf output
+	mkdir output
+	mv Makefile.bak output/Makefile
